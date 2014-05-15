@@ -1,0 +1,3 @@
+class Incomes < Transactions
+
+end

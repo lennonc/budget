@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 
+  date_of_transaction: 2014-05-14
+  description: MyString
+  transaction_type: MyString
+  amount: 
+
+two:
+  user_id: 
+  date_of_transaction: 2014-05-14
+  description: MyString
+  transaction_type: MyString
+  amount: 
