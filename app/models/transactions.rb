@@ -20,6 +20,14 @@ class Transactions < ActiveRecord::Base
     Transactions.income.sum(:amount) + Transactions.expenses.sum(:amount)
   end
 
+  def self.search(search)
+    if search
+      where('description LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
+
   private
   def date_is_not_in_future
     if self.date_of_transaction > Time.now

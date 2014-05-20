@@ -10,7 +10,7 @@ class TransactionsController < ApplicationController
     @per_page = params[:per_page].to_i > 0 ? params[:per_page].to_i : transactions_per_page_list.first
     Transactions.per_page = @per_page
 
-    @transactions = Transactions.paginate(:page => params[:page]) unless @transactions
+    @transactions = Transactions.search(params[:search]).paginate(:page => params[:page]) unless @transactions
 
   end
 
