@@ -1,5 +1,14 @@
 <h2>Transactions</h2>
 
+<div class="pagination-top pull-right">
+    Transactions per page: <div class="btn-group btn-group-md">
+      <% transactions_per_page_list.each do |num| %>
+        <%= link_to num.to_s, transactions_per_page_link(num), :class => "btn btn-default" + (@per_page.to_i == num ? ' active' : '') %>
+      <% end %>
+    </div>
+  </div>
+<br>
+<br>
 <br>
 <div class="row">
   <div class="col-md-6">

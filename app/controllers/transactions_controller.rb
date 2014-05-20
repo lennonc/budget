@@ -1,14 +1,14 @@
 class TransactionsController < ApplicationController
 
-  helper_method :quotes_per_page_list
+  helper_method :transactions_per_page_list
 
-  # def quotes_per_page_list
-  #   [10, 20, 50]
-  # end
+  def transactions_per_page_list
+    [10, 20, 50]
+  end
 
   def index
-
-    Transactions.per_page = 10
+    @per_page = params[:per_page].to_i > 0 ? params[:per_page].to_i : transactions_per_page_list.first
+    Transactions.per_page = @per_page
 
     @transactions = Transactions.paginate(:page => params[:page]) unless @transactions
 
