@@ -43,7 +43,7 @@
   <% @transactions.each do |transaction| %>
     <tr>
       <td>
-        <%= transaction.date_of_transaction%>
+        <%= format_transaction_date(transaction.date_of_transaction)%>
       </td>
 
       <td><%= transaction.description%></td>

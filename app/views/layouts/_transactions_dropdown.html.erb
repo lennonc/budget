@@ -1,0 +1,48 @@
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+  Transactions
+  <b class='caret'></b>
+</a>
+
+<ul class="dropdown-menu">
+  <div class="navbar-dropdown">
+    <div class="row">
+      <div class="col-md-6">
+        Expenses
+      </div>
+
+      <div class="col-md-6">
+        <span class="pull-right">
+          <%= number_to_currency(Transactions.total_expenses, unit: "$") %>
+        </span>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        Income
+      </div>
+
+      <div class="col-md-6">
+        <span class="pull-right money-color">
+          <%= number_to_currency(Transactions.total_income, unit: "$") %>
+        </span>
+      </div>
+    </div>
+    <li class="divider"></li>
+    <div class="row">
+      <div class="col-md-6">
+        Net Income
+      </div>
+
+      <div class="col-md-6">
+        <%if Transactions.net_income >= 0 %>
+          <span class="pull-right money-color">
+        <%else%>
+          <span class="pull-right">
+        <%end%>
+          <%= number_to_currency(Transactions.net_income, unit: "$") %>
+        </span>
+      </div>
+    </div>
+  </div>
+</ul>

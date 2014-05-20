@@ -16,6 +16,10 @@ class Transactions < ActiveRecord::Base
     Transactions.income.sum(:amount)
   end
 
+  def self.net_income
+    Transactions.income.sum(:amount) + Transactions.expenses.sum(:amount)
+  end
+
   private
   def date_is_not_in_future
     if self.date_of_transaction > Time.now
