@@ -5,6 +5,16 @@ class Transactions < ActiveRecord::Base
 
   # before_save :check_transaction_type
   belongs_to :category
+  scope :expenses, -> {where(transaction_type: 'expense')}
+  scope :income, -> {where(transaction_type: 'income')}
+
+  def self.total_expenses
+    Transactions.expenses.sum(:amount)
+  end
+
+  def self.total_income
+    Transactions.income.sum(:amount)
+  end
 
   private
   def date_is_not_in_future

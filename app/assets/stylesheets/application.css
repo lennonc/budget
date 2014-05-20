@@ -17,3 +17,25 @@
 .container{
   width: 800px;
 }
+
+.money-color{
+  color: #4ba90a;
+}
+
+
+.navbar-dropdown{
+  width: 320px;
+  padding: 15px;
+}
+
+/*.navbar-dropdown a:link{
+  text-decoration: none;
+  color: black;
+}*/
+
+/*.navbar-dropdown:before, .navbar-dropdown:after
+{
+    display: table;
+    content: "";
+    line-height: 0;
+*/}

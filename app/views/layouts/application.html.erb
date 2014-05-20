@@ -26,9 +26,16 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse">
-
         <ul class="nav navbar-nav navbar-right">
-          <li class='dropdown'><a href="">This</a></li>
+          <li class="dropdown">
+            <!-- <%= link_to "Transactions", "#" %> -->
+            <%= render partial: "layouts/transactions_dropdown"%>
+          </li>
+          <li>
+            <%= link_to "Budget", "#" %>
+          </li>
+
+          <li class='dropdown'><a href="">Profile</a></li>
         </ul>
       </div>
     </div>
