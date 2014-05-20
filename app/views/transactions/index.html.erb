@@ -1,0 +1,50 @@
+<h2>Transactions</h2>
+
+<br>
+<div class="row">
+  <div class="col-md-6">
+    <a type="button" class="btn btn-default btn-sm" href="/transactions/new">
+      <i class="fa fa-plus"></i> Add a Transaction
+    </a>
+  </div>
+  <div class="col-md-3"></div>
+  <div class="col-md-3">
+    <div class="pull-right">
+      <div class="input-group">
+        <input type="text" placeholder="Search" class="form-control">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class="table table-hover table-condensed">
+  <thead>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Category</th>
+    <th><span class="pull-right">Amount</span></th>
+    <th></th>
+  </thead>
+
+  <% @transactions.each do |transaction| %>
+    <tr>
+      <td>
+        <%= transaction.date_of_transaction%>
+      </td>
+
+      <td><%= transaction.description%></td>
+      <td><%= transaction.category.category_name %></td>
+      <td><span class="pull-right"><%= number_to_currency(transaction.amount, unit: "$") %></span></td>
+      <td>
+        <%= link_to "Edit", edit_transaction_path(transaction.id), class: "btn btn-primary btn-xs"%>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<div class="pagination-container"><%= will_paginate @transactions %></div>
