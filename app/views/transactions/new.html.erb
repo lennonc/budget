@@ -88,15 +88,4 @@
           </div>
       </div>
     </div>
-
-    <!-- <script type="text/javascript">
-      $(function() {
-        var availableTags = <%=Category.all(:select => :category_name).map{ |category| category[:category_name] }.to_json.html_safe %>;
-
-        $('#quote_speaker_name').typeahead({
-          source: availableTags
-        });
-
-      });
-    </script> -->
 <%end%>
