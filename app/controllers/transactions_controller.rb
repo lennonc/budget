@@ -21,14 +21,14 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = Transactions.new
+    @categories = Category.all
 
     date_of_transaction = format_date(params)
     @transaction.date_of_transaction = date_of_transaction
     @transaction.description = params[:transactions][:description]
     @transaction.category_id = params[:transactions][:category_id]
     @transaction.transaction_type = params[:transactions][:transaction_type]
-
-    @transaction.amount = params[:transactions][:transaction_type] == 'expense' ? -(params[:transactions][:amount].to_i) : params[:transactions][:amount].to_i
+    @transaction.amount = params[:transactions][:amount]
 
     if @transaction.save
       redirect_to root_path
@@ -45,6 +45,8 @@ class TransactionsController < ApplicationController
 
   def update
     @transaction = Transactions.find(params[:id])
+    @categories = Category.all
+
     update_params = {}
     date_of_transaction = format_date(params)
     update_params[:date_of_transaction] = date_of_transaction

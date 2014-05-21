@@ -1,7 +1,8 @@
 class Transactions < ActiveRecord::Base
   validates_presence_of :date_of_transaction, :description, :amount, :category
   validate :date_is_not_in_future
-  validates_numericality_of :amount
+  validates_numericality_of :amount, :only_integer => true, :greater_than_or_equal_to => 0
+
 
   # before_save :check_transaction_type
   belongs_to :category
@@ -17,7 +18,7 @@ class Transactions < ActiveRecord::Base
   end
 
   def self.net_income
-    Transactions.income.sum(:amount) + Transactions.expenses.sum(:amount)
+    Transactions.income.sum(:amount) - Transactions.expenses.sum(:amount)
   end
 
   def self.search(search)
