@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-
+  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   helper_method :transactions_per_page_list
 
   def transactions_per_page_list
@@ -39,12 +39,13 @@ class TransactionsController < ApplicationController
   end
 
   def edit
-    @transaction = Transactions.find(params[:id])
     @categories = Category.all
   end
 
+  def show
+  end
+
   def update
-    @transaction = Transactions.find(params[:id])
     @categories = Category.all
 
     update_params = {}
@@ -66,7 +67,19 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def destroy
+    @transaction.destroy
+    respond_to do |format|
+      format.html { redirect_to transactions_url }
+      format.json { head :no_content }
+    end
+  end
+
   private
+  def set_transaction
+      @transaction = Transactions.find(params[:id])
+    end
+
   def transaction_params
     params.require(:transactions).permit(:amount, :description, :date_of_transaction, :transaction_type, :category_id)
   end
