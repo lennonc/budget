@@ -11,6 +11,8 @@ Budget::Application.routes.draw do
   get 'logout' => 'sessions#destroy', :as => 'logout'
   get 'signup' => 'users#new', :as => 'signup'
 
+  get 'trends' => 'trends#index', :as => 'trends'
+
   # You can have the root of your site routed with "root"
   root 'transactions#index', :as => :root
 
