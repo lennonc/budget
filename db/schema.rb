@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140521224433) do
     t.date     "date_of_transaction"
     t.string   "description"
     t.string   "transaction_type"
-    t.integer  "amount"
+    t.decimal  "amount",              precision: 10, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"

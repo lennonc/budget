@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   before_filter :authorize
-  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_transaction, only: [:edit, :update, :destroy]
   helper_method :transactions_per_page_list
 
   def transactions_per_page_list
@@ -11,7 +11,6 @@ class TransactionsController < ApplicationController
     @per_page = params[:per_page].to_i > 0 ? params[:per_page].to_i : transactions_per_page_list.first
     Transaction.per_page = @per_page
 
-    # @transactions = current_user.transactions.search(params[:search]).paginate(:page => params[:page]) unless @transactions
     @transactions = current_user.transactions.paginate(:page => params[:page])
   end
 
@@ -24,6 +23,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new
     @categories = Category.all
 
+    ap params
     date_of_transaction = format_date(params)
 
     @transaction.user_id = current_user.id
@@ -80,8 +80,10 @@ class TransactionsController < ApplicationController
 
   private
   def set_transaction
+      ap params
+      ap current_user
       if current_user.transactions.find_by_id(params[:id])
-        @transaction = current_user.transactions.find_by_id(params[:id])
+        @transaction = current_user.transactions.find(params[:id])
       else
         nil
       end

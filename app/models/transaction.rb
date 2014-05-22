@@ -1,7 +1,7 @@
 class Transaction < ActiveRecord::Base
   validates_presence_of :date_of_transaction, :description, :amount, :category
   validate :date_is_not_in_future
-  validates_numericality_of :amount, :only_integer => true, :greater_than_or_equal_to => 0
+  validates_numericality_of :amount, :greater_than_or_equal_to => 0
 
 
   # before_save :check_transaction_type
@@ -18,6 +18,8 @@ class Transaction < ActiveRecord::Base
       scoped
     end
   end
+
+
 
   private
   def date_is_not_in_future
