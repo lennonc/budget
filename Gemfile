@@ -47,7 +47,7 @@ gem 'unicorn'
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt'
 
 # Use unicorn as the app server
 # gem 'unicorn'

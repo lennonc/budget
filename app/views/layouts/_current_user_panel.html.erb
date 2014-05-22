@@ -1,0 +1,30 @@
+<% if current_user %>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome <strong><%= current_user.first_name %></strong> <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li>
+        <div class="navbar-dropdown">
+          <div class="row">
+            <div class="col-md-7">
+              <span><strong><%= current_user.name %></strong></span>
+              <p class="text-muted small">
+                <%= current_user.email %>
+              </p>
+            </div>
+          </div>
+      </div>
+      <br>
+      <div class="navbar-footer">
+        <div class="navbar-footer-content">
+          <div class="row">
+            <div class="col-md-6">
+              <a href="#" class="btn btn-primary btn-sm">Settings</a>
+            </div>
+            <div class="col-md-6">
+              <%= link_to "Sign Out", logout_path, :class => 'btn btn-default btn-sm pull-right'%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+<%end%>

@@ -28,14 +28,23 @@
   padding: 15px;
 }
 
-/*.navbar-dropdown a:link{
+.navbar-dropdown a:link{
   text-decoration: none;
   color: black;
-}*/
+}
 
-/*.navbar-dropdown:before, .navbar-dropdown:after
+.navbar-dropdown:before, .navbar-dropdown:after
 {
     display: table;
     content: "";
     line-height: 0;
-*/}
+}
+
+.dropdown-menu {
+padding: 0px !important;
+overflow: hidden;
+}
+.navbar-footer {
+    background-color:#ddd;
+}
+.navbar-footer-content { padding: 10px 10px 10px 10px; }

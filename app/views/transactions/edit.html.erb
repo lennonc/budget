@@ -1,92 +1,98 @@
-<% if not @transaction.errors.full_messages.empty? %>
-    <div class="alert alert-block">
-      <% @transaction.errors.full_messages.each do |msg| %>
-        <div class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <%= msg %>
+<% if  @transaction.nil? %>
+  <div class="row">
+    Could not find specified record
+  </div>
+<%else%>
+  <% if not @transaction.errors.full_messages.empty? %>
+      <div class="alert alert-block">
+        <% @transaction.errors.full_messages.each do |msg| %>
+          <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <%= msg %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+  <%= form_for @transaction,  html: {class: "horizontal-form", role: "form"} do |f| %>
+
+    <div class="row">
+      <div class="form_group">
+        <%= f.label "Description", class: "col-sm-2 control-label"%>
+        <div class="col-sm-10">
+          <%= f.date_select :date_of_transaction, :value => @transaction.date_of_transaction, class: "form-control" %>
         </div>
-      <% end %>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="form_group">
+        <%= f.label "Type", class: "col-sm-2 control-label"%>
+        <div class="col-sm-10">
+          <%options = []%>
+          <% @categories.each do |cat| %>
+            <%options << [cat.category_name, cat.id] %>
+          <%end%>
+          <%= f.select :category_id, options%>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="form_group">
+        <%= f.label "Category", class: "col-sm-2 control-label"%>
+        <div class="col-sm-10">
+          <%= f.radio_button :transaction_type, "expense", :checked => true %> Expense
+          <%= f.radio_button :transaction_type, "income" %> Income
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+     <div class="row">
+      <% if @transaction.errors[:amount].empty?  %>
+        <div class="form_group">
+      <%else%>
+        <div class="form_group has-error">
+      <%end%>
+        <%= f.label "Amount", class: "col-sm-2 control-label"%>
+        <div class="col-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+              <%= f.text_field :amount, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <% if @transaction.errors[:description].empty?  %>
+        <div class="form_group">
+      <%else%>
+        <div class="form_group has-error">
+      <%end%>
+        <%= f.label "Description", class: "col-sm-2 control-label"%>
+        <div class="col-sm-10">
+          <%= f.text_field :description, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class='form-group'>
+          <div class="col-md-2"></div>
+          <div class="col-md-3">
+            <%= f.submit "Update", :class => "btn btn-primary"%>
+          </div>
+      </div>
     </div>
   <% end %>
-
-<%= form_for @transaction,  html: {class: "horizontal-form", role: "form"} do |f| %>
-
-  <div class="row">
-    <div class="form_group">
-      <%= f.label "Description", class: "col-sm-2 control-label"%>
-      <div class="col-sm-10">
-        <%= f.date_select :date_of_transaction, :value => @transaction.date_of_transaction, class: "form-control" %>
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="row">
-    <div class="form_group">
-      <%= f.label "Type", class: "col-sm-2 control-label"%>
-      <div class="col-sm-10">
-        <%options = []%>
-        <% @categories.each do |cat| %>
-          <%options << [cat.category_name, cat.id] %>
-        <%end%>
-        <%= f.select :category_id, options%>
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="row">
-    <div class="form_group">
-      <%= f.label "Category", class: "col-sm-2 control-label"%>
-      <div class="col-sm-10">
-        <%= f.radio_button :transaction_type, "expense", :checked => true %> Expense
-        <%= f.radio_button :transaction_type, "income" %> Income
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-   <div class="row">
-    <% if @transaction.errors[:amount].empty?  %>
-      <div class="form_group">
-    <%else%>
-      <div class="form_group has-error">
-    <%end%>
-      <%= f.label "Amount", class: "col-sm-2 control-label"%>
-      <div class="col-sm-10">
-        <div class="input-group">
-          <span class="input-group-addon">$</span>
-            <%= f.text_field :amount, class: "form-control" %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="row">
-    <% if @transaction.errors[:description].empty?  %>
-      <div class="form_group">
-    <%else%>
-      <div class="form_group has-error">
-    <%end%>
-      <%= f.label "Description", class: "col-sm-2 control-label"%>
-      <div class="col-sm-10">
-        <%= f.text_field :description, class: "form-control" %>
-      </div>
-    </div>
-  </div>
-  <br>
-
-  <div class="row">
-    <div class='form-group'>
-        <div class="col-md-2"></div>
-        <div class="col-md-3">
-          <%= f.submit "Update", :class => "btn btn-primary"%>
-        </div>
-    </div>
-  </div>
-<% end %>
+<%end%>

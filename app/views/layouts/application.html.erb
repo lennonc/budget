@@ -27,13 +27,16 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <%= render partial: "layouts/transactions_dropdown"%>
+          <% if current_user %>
+            <li class="dropdown">
+              <%= render partial: "layouts/transactions_dropdown"%>
+            </li>
+            <li><%= link_to "Budgets", "#" %></li>
+            <li><%= link_to "Trends", "#" %></li>
+          <%end%>
+          <li class='dropdown'>
+            <%= render :partial => 'layouts/current_user_panel'%>
           </li>
-          <li><%= link_to "Budgets", "#" %></li>
-          <li><%= link_to "Trends", "#" %></li>
-
-          <li class='dropdown'><a href="">Profile</a></li>
         </ul>
       </div>
     </div>
