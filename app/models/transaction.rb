@@ -11,15 +11,13 @@ class Transaction < ActiveRecord::Base
   scope :expenses, -> {where(transaction_type: 'expense')}
   scope :income, -> {where(transaction_type: 'income')}
 
-  def search(search)
+  def self.search(search, user_id)
     if search
-      where('description LIKE ?', "%#{search}%")
+      where('description LIKE ? AND user_id = ?', "%#{search}%", "#{user_id}")
     else
       scoped
     end
   end
-
-
 
   private
   def date_is_not_in_future
