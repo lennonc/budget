@@ -1,4 +1,4 @@
-class Transactions < ActiveRecord::Base
+class Transaction < ActiveRecord::Base
   validates_presence_of :date_of_transaction, :description, :amount, :category
   validate :date_is_not_in_future
   validates_numericality_of :amount, :only_integer => true, :greater_than_or_equal_to => 0
@@ -12,18 +12,18 @@ class Transactions < ActiveRecord::Base
   scope :income, -> {where(transaction_type: 'income')}
 
   def self.total_expenses
-    Transactions.expenses.sum(:amount)
+    expenses.sum(:amount)
   end
 
   def self.total_income
-    Transactions.income.sum(:amount)
+    income.sum(:amount)
   end
 
   def self.net_income
-    Transactions.income.sum(:amount) - Transactions.expenses.sum(:amount)
+    income.sum(:amount) - expenses.sum(:amount)
   end
 
-  def self.search(search)
+  def search(search)
     if search
       where('description LIKE ?', "%#{search}%")
     else

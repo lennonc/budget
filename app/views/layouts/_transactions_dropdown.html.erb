@@ -12,7 +12,7 @@
 
       <div class="col-md-6">
         <span class="pull-right">
-          <%= number_to_currency(Transactions.total_expenses, unit: "$") %>
+          <%= number_to_currency(Transaction.total_expenses, unit: "$") %>
         </span>
       </div>
     </div>
@@ -24,7 +24,7 @@
 
       <div class="col-md-6">
         <span class="pull-right money-color">
-          <%= number_to_currency(Transactions.total_income, unit: "$") %>
+          <%= number_to_currency(Transaction.total_income, unit: "$") %>
         </span>
       </div>
     </div>
@@ -35,12 +35,12 @@
       </div>
 
       <div class="col-md-6">
-        <%if Transactions.net_income >= 0 %>
+        <%if Transaction.net_income >= 0 %>
           <span class="pull-right money-color">
         <%else%>
           <span class="pull-right">
         <%end%>
-          <%= number_to_currency(Transactions.net_income, unit: "$") %>
+          <%= number_to_currency(Transaction.net_income, unit: "$") %>
         </span>
       </div>
     </div>
