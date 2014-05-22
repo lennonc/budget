@@ -1,0 +1,40 @@
+<h3>Sign up</h3>
+
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-error">
+      <h5>You have errors</h5>
+      <ul>
+        <% for message in @user.errors.full_messages %>
+          <li><%= message %></li>
+        <%end%>
+      </ul>
+    </div>
+  <%end%>
+  <table>
+    <tr>
+      <td><%= f.label "First name"%></td>
+      <td><%= f.text_field :first_name%></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Last name"%></td>
+      <td><%= f.text_field :last_name%></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Email"%></td>
+      <td><%= f.email_field :email%></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Password"%></td>
+      <td><%= f.password_field :password%></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Password Confirmation"%></td>
+      <td><%= f.password_field :password_confirmation%></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="submit-button"><%= f.submit "Sign Up!", :class => "btn btn-primary"%></td>
+    </tr>
+  </table>
+<%end%>

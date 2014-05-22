@@ -6,6 +6,8 @@ class Transactions < ActiveRecord::Base
 
   # before_save :check_transaction_type
   belongs_to :category
+  belongs_to :user
+
   scope :expenses, -> {where(transaction_type: 'expense')}
   scope :income, -> {where(transaction_type: 'income')}
 
