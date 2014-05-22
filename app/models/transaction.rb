@@ -11,18 +11,6 @@ class Transaction < ActiveRecord::Base
   scope :expenses, -> {where(transaction_type: 'expense')}
   scope :income, -> {where(transaction_type: 'income')}
 
-  def self.total_expenses
-    expenses.sum(:amount)
-  end
-
-  def self.total_income
-    income.sum(:amount)
-  end
-
-  def self.net_income
-    income.sum(:amount) - expenses.sum(:amount)
-  end
-
   def search(search)
     if search
       where('description LIKE ?', "%#{search}%")

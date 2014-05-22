@@ -81,7 +81,7 @@ class TransactionsController < ApplicationController
   private
   def set_transaction
       if current_user.transactions.find_by_id(params[:id])
-        @transaction = current_user.transactions.find(params[:id])
+        @transaction = current_user.transactions.find_by_id(params[:id])
       else
         nil
       end

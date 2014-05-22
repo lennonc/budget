@@ -6,10 +6,22 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email
   validates_confirmation_of :password
 
+
   before_save :encrypt_password
 
   has_many :transactions
 
+  def total_expenses
+    self.transactions.expenses.sum(:amount)
+  end
+
+  def total_income
+    self.transactions.income.sum(:amount)
+  end
+
+  def net_income
+    self.transactions.income.sum(:amount) - self.transactions.expenses.sum(:amount)
+  end
 
   def self.authenticate(email, password)
     user = find_by_email(email)
