@@ -50,16 +50,7 @@ class TransactionsController < ApplicationController
   def update
     @categories = Category.all
 
-    update_params = {}
-    date_of_transaction = format_date(params)
-    update_params[:date_of_transaction] = date_of_transaction
-    update_params[:description] = params[:transaction][:description]
-    update_params[:category_id] = params[:transaction][:category_id]
-    update_params[:transaction_type] = params[:transaction][:transaction_type]
-
-    update_params[:amount] = params[:transaction][:amount]
-
-    if @transaction.update_attributes(update_params)
+    if @transaction.update_attributes(transaction_params)
       redirect_to root_path
     else
       render :edit
