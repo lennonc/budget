@@ -11,7 +11,7 @@ class TransactionsController < ApplicationController
     @per_page = params[:per_page].to_i > 0 ? params[:per_page].to_i : transactions_per_page_list.first
     Transaction.per_page = @per_page
 
-    @transactions = current_user.transactions.search(params[:search], current_user.id).paginate(:page => params[:page])
+    @transactions = current_user.transactions.search(params[:search], current_user.id).order('created_at DESC').paginate(:page => params[:page])
   end
 
   def new
