@@ -20,3 +20,8 @@ $(function(){
     $(this).alert('close')
   });
 });
+
+$('div#show-graph-toggle a').click(function (e) {
+  $('div#show-graph-toggle a.active').removeClass('active');
+  $(this).addClass('active');
+});

@@ -1,3 +1,148 @@
-<div id="net_income_graph" style="min-width: 310px; height: 400px; margin: 0 auto">
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('#one_month').highcharts({
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Net Income This Month'
+      },
+       xAxis: { title:{text: 'Date'},
+                categories:[<%months_of_data(0).each do |month|%>
+                              "<%=month%>",
+                              <%end%>]},
+       yAxis: { title:{text: 'Dollars'}},
 
+      credits: {
+        enabled: false
+      },
+      plotOptions: {
+        series: {
+          stacking: 'normal',
+        }
+      },
+      tooltip: {
+        formatter: function() {
+          return ("$" + Highcharts.numberFormat(this.y, 2));
+        }
+      },
+        series:[
+          {
+            <% transactions = current_user.transactions.income_between(Date.today.months_ago(1), Date.today) %>
+            name: "Income",
+            color: '#3D9D50',
+            data: <%= current_month_income(transactions) %>
+          },
+          {
+            <% transactions = current_user.transactions.expenses_between(Date.today.months_ago(1), Date.today) %>
+            name: "Expenses",
+            color: '#DB1A23',
+            data: <%= current_month_expenses(transactions) %>
+          },
+        ]
+    });
+  });
+
+  $(function () {
+    $('#six_months').highcharts({
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Net Income Past 6 Months'
+      },
+       xAxis: { title:{text: 'Date'},
+                categories:[<%months_of_data(5).each do |month|%>
+                              "<%=month%>",
+                              <%end%>]},
+       yAxis: { title:{text: 'Dollars'}},
+
+      credits: {
+        enabled: false
+      },
+      plotOptions: {
+        series: {
+          stacking: 'normal',
+        }
+      },
+      tooltip: {
+        formatter: function() {
+          return ("$" + Highcharts.numberFormat(this.y, 2));
+        }
+      },
+        series:[
+          {
+            <% transactions = current_user.transactions.income_between(Date.today.months_ago(1), Date.today) %>
+            name: "Income",
+            color: '#3D9D50',
+            data: <%= current_month_income(transactions) %>
+          },
+          {
+            <% transactions = current_user.transactions.expenses_between(Date.today.months_ago(1), Date.today) %>
+            name: "Expenses",
+            color: '#DB1A23',
+            data: <%= current_month_expenses(transactions) %>
+          },
+        ]
+    });
+  });
+
+$(function () {
+    $('#twelve_months').highcharts({
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Net Income The Past Year'
+      },
+       xAxis: { title:{text: 'Date'},
+                categories:[<%months_of_data(11).each do |month|%>
+                              "<%=11%>",
+                              <%end%>]},
+       yAxis: { title:{text: 'Dollars'}},
+
+      credits: {
+        enabled: false
+      },
+      plotOptions: {
+        series: {
+          stacking: 'normal',
+        }
+      },
+      tooltip: {
+        formatter: function() {
+          return ("$" + Highcharts.numberFormat(this.y, 2));
+        }
+      },
+        series:[
+          {
+            <% transactions = current_user.transactions.income_between(Date.today.months_ago(1), Date.today) %>
+            name: "Income",
+            color: '#3D9D50',
+            data: <%= current_month_income(transactions) %>
+          },
+          {
+            <% transactions = current_user.transactions.expenses_between(Date.today.months_ago(1), Date.today) %>
+            name: "Expenses",
+            color: '#DB1A23',
+            data: <%= current_month_expenses(transactions) %>
+          },
+        ]
+    });
+  });
+</script>
+
+<div class="btn-group" id="show-graph-toggle">
+  <a class="btn btn-default btn-sm active" href="#one_month" data-toggle="tab">1 Month</a>
+  <a class="btn btn-default btn-sm" href="#six_months" data-toggle="tab">6 Months</a>
+  <a class="btn btn-default btn-sm" href="#twelve_months" data-toggle="tab">Past Year</a>
 </div>
+<div class='tab-content'>
+    <div class='tab-pane active' id="one_month" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+    <div class='tab-pane' id="six_months" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+    <div class='tab-pane' id="twelve_months" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+
+<%=months_of_data(11)%>
