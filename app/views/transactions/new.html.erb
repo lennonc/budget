@@ -10,7 +10,13 @@
     </div>
   <% end %>
 
-<%= form_for @transaction, url: {action: "create"}, html: {class: "horizontal-form", role: "form" } do |f| %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">Add New Transaction</h1>
+
+  </div>
+  <div class="panel-body">
+    <%= form_for @transaction, url: {action: "create"}, html: {class: "horizontal-form", role: "form" } do |f| %>
   <div class="row">
     <div class="form_group">
       <%= f.label "Date", class: "col-sm-2 control-label"%>
@@ -89,3 +95,5 @@
       </div>
     </div>
 <%end%>
+  </div>
+</div>
