@@ -3,6 +3,7 @@ Budget::Application.routes.draw do
   resources :transactions
   resources :users
   resources :sessions
+  resources :proposed_budgets
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

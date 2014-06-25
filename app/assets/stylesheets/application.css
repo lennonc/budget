@@ -22,12 +22,24 @@
   color: #4ba90a;
 }
 
+.amount-negative{
+  color: red;
+  font-weight: bold;
+}
+
+.amount-positive{
+  color: green;
+  font-weight: bold;
+}
 
 .navbar-dropdown{
   width: 320px;
   padding: 15px;
 }
 
+.sidebar{
+  min-height: 650px;
+}
 .navbar-dropdown a:link{
   text-decoration: none;
   color: black;

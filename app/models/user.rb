@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
 
   has_many :transactions
+  has_many :proposed_budgets
 
   def total_expenses
     self.transactions.expenses.sum(:amount)

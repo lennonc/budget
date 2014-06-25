@@ -1,0 +1,44 @@
+<h5>You've Budgeted</h5>
+<%
+  income = current_user.proposed_budgets.budgeted_income.sum(:amount)
+  expenses = current_user.transactions.expenses.sum(:amount)
+  left_over = income - expenses
+%>
+<div class="row">
+  <div class="col-sm-12">
+    <span>
+      Income:
+      <div class="pull-right">
+        <%= number_to_currency(income, unit: "$")%>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <span>
+      Expenses:
+      <div class="amount-negative pull-right">
+          - <%= number_to_currency(expenses, unit: "$")%>
+      </div>
+    </span>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-12">
+    <span>
+      Left Over
+      <% if left_over > 0%>
+        <div class="amount-positive pull-right">
+      <% else %>
+        <div class="amount-negative pull-right">
+      <%end%>
+        <%= number_to_currency(income - expenses, unit: "$")%>
+      </div>
+    </span>
+  </div>
+</div>
+
+
