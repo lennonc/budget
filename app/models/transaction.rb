@@ -15,7 +15,7 @@ class Transaction < ActiveRecord::Base
     if search
       where('description LIKE ? AND user_id = ?', "%#{search}%", "#{user_id}")
     else
-      scoped
+      Transaction.where(:user_id => user_id)
     end
   end
 
